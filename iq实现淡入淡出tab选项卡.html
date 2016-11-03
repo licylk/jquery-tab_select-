@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jq实现淡入淡出tab选项卡</title>
+<style>
+ul,div,li {padding:0;margin:0;}
+.container {width:300px;position:relative;margin:50px auto;}
+.list {position:relative;left:0;top:0;overflow:hidden;list-style:none;}
+.list li {float:left;margin-right:20px;border:2px solid white;z-index:10;background:#ccc;}
+.list a {display:block;width:60px;text-align:center;line-height:50px;text-decoration:none;}
+ul li.choose {border-bottom:2px solid #C6F;background:#C6F;}
+
+.intro {position:relative;width:300px;height:100px;margin-top:0px;line-height:30px;margin-left:2px;}
+.intro div {width:300px;height:100px;display:none;background:#C6F;}
+.intro div.chnIntro {display:block;}
+</style>
+
+<script src="jquery.js"></script>
+<script>
+ $(document).ready(function(){
+	$("ul li").click(function(){
+	   var tabList = $(this).index();
+	   if($(".intro div").eq(tabList).is(":visible")){
+		 return false;   
+	   } else {
+	   $(this).addClass("choose").siblings().removeClass("choose");		   
+	   $(".intro div").filter(':visible').fadeOut(100,function(){
+       $(".intro div").eq(tabList).fadeIn(100);
+	   })
+	   }
+	})
+ })
+</script>
+</head>
+
+<body>
+<div class="container">
+ <ul class="list">
+   <li class="choose"><a href="#">语文</a></li>
+   <li><a href="#">数学</a></li>
+   <li><a href="#">英语</a></li>
+ </ul>
+ <div class="intro">
+   <div class="chnIntro">背上飞行包腾空而起，去上班或走亲访友，不用再担心拥堵……</div>
+   <div class="matIntro">1+33=34</div>
+   <div class="engIntro">hello world</div>
+ </div>
+</div>
+</body>
+</html>
